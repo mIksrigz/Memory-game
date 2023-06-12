@@ -1,9 +1,11 @@
 body {
   background: #222;
   color: #fefefe;
+  font-size: 2rem;
+  text-align: center;
 }
 
-#board {
+.board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
@@ -17,4 +19,26 @@ div {
 .card-back {
   background-image: url(img/crowSmoking.png);
   background-size: cover;
+}
+
+.button {
+  margin: 0 2rem;
+  font-size: 1.25rem;
+  padding: 0.25em 0.75em;
+  cursor: pointer;
+  border: transparent;
+  border-radius: 0.5em;
+  outline: 2px solid red;
+  background: #fefefe;
+  color: #222;
+  transition: all 250ms ease-in-out;
+}
+
+.button:hover {
+  background: #222;
+  color: #fefefe;
+}
+
+.display-none {
+  display: none;
 }
