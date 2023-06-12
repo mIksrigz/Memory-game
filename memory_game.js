@@ -50,19 +50,37 @@ const cardBackImgSrc = 'url(img/crowSmoking.png)';
 let canRevealCard = true;
 let revealdCardsId = [];
 
-const revealCard = (id) => {
+const revealCard = id => {
   if (canRevealCard) {
+    
     document.querySelector(`#card${id}`).style.backgroundImage = `${cardObject[id]['cardImgSrc']}`;
     revealdCardsId.push(id);
 
     if (revealdCardsId.length == 2 && canRevealCard) {
+      checkForPair(revealdCardsId);
       canRevealCard = false;
-      setTimeout(`hideCard(${revealdCardsId[0]})`, '1000');
-      setTimeout(`hideCard(${revealdCardsId[1]})`, '1000');
-      setTimeout('canRevealCard = true', '1000');
+      setTimeout(`hideCard(${revealdCardsId[0]})`, '500');
+      setTimeout(`hideCard(${revealdCardsId[1]})`, '500');
+      setTimeout('canRevealCard = true', '500');
       revealdCardsId = [];
     }
   }
 }
 const hideCard = nr => document.querySelector(`#card${nr}`).style.backgroundImage = cardBackImgSrc;
-const checkForPair = () => { };
+
+const checkForPair = (arr) => {
+  if (cardObject[arr[0]].cardValue == cardObject[arr[1]].cardValue) {
+    const card1 = document.querySelector(`#card${arr[0]}`);
+    const card2 = document.querySelector(`#card${arr[1]}`);
+    console.log(card1);
+    console.log(card2);
+    setTimeout(removeCards(card1, card2), '500')
+  }
+};
+
+const removeCards = (card1, card2) => {
+  card1.setAttribute('onclick', ';');
+  card2.setAttribute('onclick', ';');
+  card1.style.opacity = '0';
+  card2.style.opacity = '0';
+}
