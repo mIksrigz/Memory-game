@@ -1,44 +1,118 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background: #222;
-  color: #fefefe;
-  font-size: 2rem;
-  text-align: center;
+  background-color: #222;
 }
 
 .board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.starting-menu-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
+  gap: 1em;
 }
 
-div {
-  width: 100%;
-  aspect-ratio: 1;
+.instruction {
+  text-align: center;
+  font-size: 2.5rem;
+  color: white;
 }
 
-.card-back {
-  background-image: url(img/crowSmoking.png);
-  background-size: cover;
+.buttons-container {
+  display: flex;
+  gap: 1em;
+  margin: 0 auto;
 }
 
-.button {
-  margin: 0 2rem;
-  font-size: 1.25rem;
+.board-size-button {
   padding: 0.25em 0.75em;
+  border: 2px solid white;
+  border-radius: 0.25em;
+  background-color: #803a3a;
+
   cursor: pointer;
-  border: transparent;
-  border-radius: 0.5em;
-  outline: 2px solid red;
-  background: #fefefe;
-  color: #222;
-  transition: all 250ms ease-in-out;
+  font-size: 1.5rem;
+  color: white;
+
+  transition: background-color 250ms ease-out,
+    color 250ms ease-out;
 }
 
-.button:hover {
-  background: #222;
-  color: #fefefe;
+.board-size-button:hover {
+  background-color: white;
+  color: #803a3a;
 }
 
-.display-none {
-  display: none;
+.card {
+  width: 50px;
+  height: 50px;
+  background-color: #803a3a;
+}
+
+.collumns-4 {
+  display: grid;
+  justify-items: center;
+  gap: 0.25em;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media(min-width: 500px){
+
+  .starting-menu-container {
+    gap: 2em;
+  }
+  
+  .instruction {
+    font-size: 3rem;
+  }
+  
+  .buttons-container {
+    gap: 2em;
+  }
+  
+  .board-size-button {
+    padding: 0.25em 0.75em;
+    border-radius: 0.25em;  
+    font-size: 2rem;
+  }
+  .card{
+    width: 100px;
+    height: 100px;
+  }
+}
+@media(min-width: 800px){
+  .starting-menu-container {
+    gap: 3em;
+  }
+  
+  .instruction {
+    font-size: 4rem;
+  }
+  
+  .buttons-container {
+    gap: 2em;
+  }
+  
+  .board-size-button {
+    padding: 0.25em 0.75em;
+    border-radius: 0.25em;  
+    font-size: 2.5rem;
+  }
+
+  .card{
+    width: 150px;
+    height: 150px;
+  }
 }
