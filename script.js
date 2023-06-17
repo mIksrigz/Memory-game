@@ -69,32 +69,60 @@ const shuffleCards = () => {
       if (leftToDraw > 0) {
         availableCards[randomIndex].cardsLeft--;
         const id = availableCards[randomIndex].cardId;
-        const url = `img/img${id + 1}.png`;
+        const url = `url(img/img${id + 1}.png)`;
 
-        shuflledcards.push({ cardId: id, cardUrl: url });
+        shuflledcards.push({ cardUrl: url });
         procede = false;
       }
     }
 
   }
-  console.log(shuflledcards);
-  console.log(availableCards);
 }
 
-let revaldCards = 0;
+let revealdCards = 0;
+let revealdCardsArray = [];
+let revealdCardsUrl = [];
+
 board.addEventListener('click', e => {
 
   if (e.target.matches('div')) {
-    if (revaldCards < 2) {
-      revaldCards++;
+
+    if (revealdCards < 2) {
       revealCard(e.target);
+
     }
+
   }
 });
 
-const revealCard = handle => {
-  const numRegex = /\d+/g;
-  let id = handle.id.match(numRegex);
-  let index = id[0] - 1;
-  handle.style.backgroundImage = `url(${shuflledcards[index].cardUrl})`;
+const revealCard = card => {
+  let id = card.id;
+  let index = id.match(/\d+/)[0] - 1;
+  card.style.backgroundImage = shuflledcards[index].cardUrl;
+  revealdCardsUrl.push(shuflledcards[index].cardUrl);
+  revealdCardsArray.push(card);
+  revealdCards++;
+
+  if (revealdCards === 2) {
+    if (revealdCardsUrl[0] === revealdCardsUrl[1]) {
+      revealdCardsArray[0].style.opacity = '0';
+      revealdCardsArray[1].style.opacity = '0';
+      revealdCardsArray = [];
+      revealdCardsUrl = [];
+      revealdCards = 0;
+    } else {
+      console.log(revealdCardsArray)
+      setTimeout('hideCards(revealdCardsArray)', '1000');
+    }
+
+  }
 }
+
+const hideCards = revealdCardsArr => {
+  revealdCardsArr[0].style.backgroundImage = 'url(img/crowSmoking.png)';
+  revealdCardsArr[1].style.backgroundImage = 'url(img/crowSmoking.png)';
+  revealdCardsArray = [];
+  revealdCardsUrl = [];
+  revealdCards = 0;
+}
+
