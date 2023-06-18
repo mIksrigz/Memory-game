@@ -57,7 +57,12 @@ body {
   width: 50px;
   height: 50px;
   background: url(img/crowSmoking.png) no-repeat center center / cover;
+  opacity: 1;
   cursor: pointer;
+}
+
+.disply-none {
+  display: none;
 }
 
 .collumns-4 {
@@ -69,50 +74,52 @@ body {
   margin: 0 auto;
 }
 
-@media(min-width: 500px){
+@media(min-width: 500px) {
 
   .starting-menu-container {
     gap: 2em;
   }
-  
+
   .instruction {
     font-size: 3rem;
   }
-  
+
   .buttons-container {
     gap: 2em;
   }
-  
+
   .board-size-button {
     padding: 0.25em 0.75em;
-    border-radius: 0.25em;  
+    border-radius: 0.25em;
     font-size: 2rem;
   }
-  .card{
+
+  .card {
     width: 100px;
     height: 100px;
   }
 }
-@media(min-width: 800px){
+
+@media(min-width: 800px) {
   .starting-menu-container {
     gap: 3em;
   }
-  
+
   .instruction {
     font-size: 4rem;
   }
-  
+
   .buttons-container {
     gap: 2em;
   }
-  
+
   .board-size-button {
     padding: 0.25em 0.75em;
-    border-radius: 0.25em;  
+    border-radius: 0.25em;
     font-size: 2.5rem;
   }
 
-  .card{
+  .card {
     width: 150px;
     height: 150px;
   }
