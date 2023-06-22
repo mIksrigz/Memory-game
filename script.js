@@ -88,11 +88,15 @@ const drawBoard = () => {
 
 let revealdCards = 0;
 let revealdCardsArray = []
+let turns = 0;
 let pairsFound = 0;
 
 const revealCard = card => {
 
-  if (card.style.opacity !== 0) {
+
+  isCardHidden = card.classList.contains('hidden-card');
+
+  if (!isCardHidden) {
 
     if (revealdCards < 2) {
       revealdCardsArray.push(card);
@@ -102,6 +106,7 @@ const revealCard = card => {
 
     }
     if (revealdCards === 2) {
+      turns++;
       setTimeout('checkIfPair(revealdCardsArray)', '1000');
     }
 
@@ -113,12 +118,14 @@ const revealCard = card => {
 
 const checkIfPair = cards => {
   if (shuffledCards[cards[0].id] === shuffledCards[cards[1].id]) {
-    cards[0].style.opacity = '0';
-    cards[1].style.opacity = '0';
-    cards[0].style.cursor = 'default';
-    cards[1].style.cursor = 'default';
+    cards[0].classList.add('hidden-card');
+    cards[1].classList.add('hidden-card');
+    pairsFound++;
     revealdCardsArray = [];
     revealdCards = 0;
+    // if (pairsFound === (revealdCardsArray.length / 2) - 1) {
+    //   console.log(`you won in ${turns} turns`);
+    // }
   } else {
     hideCard(revealdCardsArray);
   }

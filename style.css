@@ -65,6 +65,11 @@ body {
   display: none;
 }
 
+.hidden-card{
+  opacity: 0;
+  cursor: default;
+}
+
 .collumns-4 {
   display: grid;
   justify-items: center;
