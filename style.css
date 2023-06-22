@@ -61,10 +61,6 @@ body {
   cursor: pointer;
 }
 
-.disply-none {
-  display: none;
-}
-
 .hidden-card{
   opacity: 0;
   cursor: default;

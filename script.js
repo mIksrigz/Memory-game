@@ -62,7 +62,6 @@ const shuffleCards = () => {
 }
 
 const removeInstructions = () => {
-  //startingMenuContainer.classList.add('disply-none');
   startingMenuContainer.remove();
   drawBoard();
 }
@@ -77,14 +76,14 @@ const drawBoard = () => {
   })
 
   board.addEventListener('click', e => {
-    if (e.target.matches('div')) revealCard(e.target);
+    if (e.target.matches('.card')) revealCard(e.target);
   });
 }
 
 let revealdCards = 0;
 let revealdCardsArray = [];
 let turns = 0;
-console.log(board.childNodes);
+
 const revealCard = card => {
 
 
