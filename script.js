@@ -23,20 +23,15 @@ for (let i = 0; i < 3; i++) {
 
 }
 
-
-
-
-let cards = [];
-const shuffledCards = [];
-
-
-
 board.addEventListener('click', e => {
   if (e.target.matches('button')) prepareCards(e.target.value);
 })
 
 
 
+
+let cards = [];
+let shuffledCards = [];
 
 const prepareCards = number => {
   for (let i = 0; i < (number / 2); i++) {
@@ -63,12 +58,12 @@ const shuffleCards = () => {
       }
     }
   }
-  cards = [];
   removeInstructions();
 }
 
 const removeInstructions = () => {
-  startingMenuContainer.classList.add('disply-none');
+  //startingMenuContainer.classList.add('disply-none');
+  startingMenuContainer.remove();
   drawBoard();
 }
 
@@ -87,10 +82,9 @@ const drawBoard = () => {
 }
 
 let revealdCards = 0;
-let revealdCardsArray = []
+let revealdCardsArray = [];
 let turns = 0;
-let pairsFound = 0;
-
+console.log(board.childNodes);
 const revealCard = card => {
 
 
@@ -99,35 +93,41 @@ const revealCard = card => {
   if (!isCardHidden) {
 
     if (revealdCards < 2) {
-      revealdCardsArray.push(card);
-      let url = shuffledCards[card.id];
-      card.style.backgroundImage = `${url}`;
-      revealdCards++;
-
+      if (card !== revealdCardsArray[0]) {
+        revealdCardsArray.push(card);
+        let url = shuffledCards[card.id];
+        card.style.backgroundImage = `${url}`;
+        revealdCards++;
+      }
     }
     if (revealdCards === 2) {
       turns++;
       setTimeout('checkIfPair(revealdCardsArray)', '1000');
     }
 
-  } else {
-    console.log('already found pair');
   }
-
 }
 
+let pairsFound = 0;
 const checkIfPair = cards => {
   if (shuffledCards[cards[0].id] === shuffledCards[cards[1].id]) {
     cards[0].classList.add('hidden-card');
     cards[1].classList.add('hidden-card');
-    pairsFound++;
     revealdCardsArray = [];
     revealdCards = 0;
-    // if (pairsFound === (revealdCardsArray.length / 2) - 1) {
-    //   console.log(`you won in ${turns} turns`);
-    // }
+    pairsFound++;
+    checkIfWin(pairsFound);
   } else {
     hideCard(revealdCardsArray);
+  }
+}
+
+const checkIfWin = pairs => {
+  console.log(`${pairs} ${cards.length}`);
+  if (pairs === cards.length) {
+    displayWin();
+    console.log('you won');
+    cards = [];
   }
 }
 
@@ -136,4 +136,28 @@ const hideCard = cards => {
   cards[1].style.backgroundImage = 'url(img/crowSmoking.png)';
   revealdCardsArray = [];
   revealdCards = 0;
+}
+
+const displayWin = () => {
+
+
+  pairs = 0
+  shuffledCards = [];
+  board.remove();
+  const main = document.querySelector('main');
+  const win = document.createElement('div');
+  win.classList = 'win';
+  const winText = document.createElement('p');
+  winText.classList = 'win-text';
+  winText.innerText = `You Won in ${turns} turns.`;
+  win.append(winText);
+  const playAgain = document.createElement('button');
+  playAgain.classList = 'board-size-button';
+  playAgain.innerText = 'Play Again';
+  win.append(playAgain);
+  main.append(win);
+
+  playAgain.addEventListener('click', () => {
+    document.location.reload();
+    })
 }
