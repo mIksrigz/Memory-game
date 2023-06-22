@@ -35,7 +35,7 @@ let shuffledCards = [];
 
 const prepareCards = number => {
   for (let i = 0; i < (number / 2); i++) {
-    cards.push({ cardUrl: `url(img/img${i + 1}.png)`, cardsLeft: 2 });
+    cards.push({ cardUrl: `url(img/img${i + 1}.jpg)`, cardsLeft: 2 });
   }
   shuffleCards();
 }
